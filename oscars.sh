@@ -17,8 +17,42 @@ do
 
 case $X in 
 1) 
-	clear
-	echo "En desemvolupaement"
+clear
+
+
+echo "
+--------------------------------------------------
+                 Històric d’Oscars
+--------------------------------------------------
+1.1 Mostrar històric d’Oscars a millor actor (alfabètic).
+1.2 Mostrar històric d’Oscars a millor actriu (edat)
+1.3 Mostrar històric d’Oscars (actors/actrius)."
+
+read opcio
+
+case $opcio in
+
+1)
+   cat oscar_age_male.csv | sort -k 4 > oscar_age_male_ordenat.csv
+   lineas=`wc -l < oscar_age_male_ordenat.csv`
+   a=1
+   
+   echo " Actor	 Any   Edat	Pel·lícula"
+   until [ $a -eq $lineas ]
+   do
+   nom=`head -$a oscar_age_male_ordenat.csv | tail -1 | cut -d"," -f4`
+   any=`head -$a oscar_age_male_ordenat.csv | tail -1 | cut -d"," -f2`
+   edat=`head -$a oscar_age_male_ordenat.csv | tail -1 | cut -d"," -f3`
+   pelicula=`head -$a oscar_age_male_ordenat.csv | tail -1 | cut -d"," -f5`
+   
+   echo $nom  $any $edat $pelicula
+   ((a++))
+   
+   done 
+   ;;
+   
+  
+ esac
 	
 	echo -e "Presione cualquier tecla para continuar \n"
 	read -n 1 -s -r -p ""
