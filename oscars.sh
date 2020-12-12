@@ -45,8 +45,11 @@ case $opcio in
    pelicula=`head -$a oscar_age_male_ordenat.csv | tail -1 | cut -d"," -f5`
    
    echo $nom  $any $edat $pelicula
-   done
+   ((a++))
+   
+   done 
    ;;
+   
 2)
    cat oscar_age_female.csv | sort -k 3 -n > oscar_age_female_ordenat.csv
    lineas=`wc -l < oscar_age_female_ordenat.csv`
@@ -65,7 +68,38 @@ case $opcio in
    
    done 
    ;;
-
+   
+ 3)
+   cat oscar_age_male.csv | sort -k 2 -n > oscar_age_male_ordenatany.csv
+   cat oscar_age_female.csv | sort -k 2 -n > oscar_age_female_ordenatany.csv
+   lineas=`wc -l < oscar_age_female_ordenatany.csv`
+   a=1
+   
+   until [ $a -eq $lineas ]
+   do
+   any=`head -$a oscar_age_male_ordenatany.csv | tail -1 | cut -d"," -f2`
+   
+   nomm=`head -$a oscar_age_male_ordenatany.csv | tail -1 | cut -d"," -f4`
+   edatm=`head -$a oscar_age_male_ordenatany.csv | tail -1 | cut -d"," -f3`
+   peliculam=`head -$a oscar_age_male_ordenatany.csv | tail -1 | cut -d"," -f5`
+   nomf=`head -$a oscar_age_female_ordenatany.csv | tail -1 | cut -d"," -f4`
+   edatf=`head -$a oscar_age_female_ordenatany.csv | tail -1 | cut -d"," -f3`
+   peliculaf=`head -$a oscar_age_female_ordenatany.csv | tail -1 | cut -d"," -f5`
+   
+   echo -n "
+any: $any
+actor: $nomm
+edat: $edatm
+pel·lícula: $peliculam
+actriu: $nomf
+edat: $edatf
+pel·lícula: $peliculaf
+----------------------------------------------------------------"
+   ((a++))
+   
+   done  
+   ;;
+  
  esac
 	
 	echo -e "Presione cualquier tecla para continuar \n"
