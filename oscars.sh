@@ -68,6 +68,10 @@ echo -n "Pel·lícula: "
 grep -F $any oscar_age_female.csv | awk -F, '{print $5}' 
 echo "";;
 2)
+read Actriu
+echo "Oscars a millor actriu obtinguts per: $Actriu
+Edat Any Pel·lícula"
+grep -F "$Actriu" oscar_age_female.csv | awk -F, '{printf $3}{printf $2}{printf $5}{print""}'
 
 ;;
 3)
