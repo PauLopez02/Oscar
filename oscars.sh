@@ -75,7 +75,44 @@ grep -F "$Actriu" oscar_age_female.csv | awk -F, '{printf $3}{printf $2}{printf 
 
 ;;
 3)
+	read pelicula
+	indexf=`grep -F "$pelicula" oscar_age_female.csv | awk -F, '{printf $1}'` 
+	indexm=`grep -F "$pelicula" oscar_age_male.csv | awk -F, '{printf $1}'` 
+	lineasf=$((indexf + 1))
+	lineasm=$((indexm + 1))
+	anym=0
+	anyf=0
+	anym=`grep -F "$pelicula" oscar_age_male.csv | awk -F, '{printf $2}'`
+	anyf=`grep -F "$pelicula" oscar_age_female.csv | awk -F, '{printf $2}'`
+	
+	if [ $anyf > 0 ]
+	then
+		any=$anyf
+	else
+		any=$anym
+	fi
+	
+	nomf=`grep -F "$any" oscar_age_female.csv | awk -F, '{printf $4}'`
+	edadf=`grep -F "$any" oscar_age_female.csv | awk -F, '{printf $3}'`
+	nomm=`grep -F "$any" oscar_age_male.csv | awk -F, '{printf $4}'`
+	edadm=`grep -F "$any" oscar_age_male.csv | awk -F, '{printf $3}'`
+	
+	
+	echo "Oscars a millor actriu i actor obtinguts per:"
+	echo $pelicula
+echo -n "Any:"
+echo  $any
+echo "----------------------------------------------
+actriu: $nomf
+edat: $edadf
+actor: $nomm
+edat: $edadm 
+"
+	
+   
 
+
+   
 ;;
 esac
 done
@@ -94,6 +131,7 @@ Base de Dades d’actors i actrius guanyadors/es de l’Oscar
 3)
 	clear
 	echo "En desemvolupaement"
+	
 	
 	echo -e "Presione cualquier tecla para continuar \n"
 	read -n 1 -s -r -p ""
